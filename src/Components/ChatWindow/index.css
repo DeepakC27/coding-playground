@@ -1,0 +1,16 @@
+.chat-window {
+  background-color: var(--light-grey);
+  min-width: 200px;
+  min-height: 30vh;
+  border-radius: 4px;
+  height: 70%;
+  width: 100%;
+  padding: 2rem;
+}
+
+.chat-window ul {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: scroll;
+}

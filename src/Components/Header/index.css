@@ -1,0 +1,17 @@
+header {
+  padding: var(--body-spacing);
+  border-bottom: 2px solid var(--border-color);
+}
+header ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  grid-gap: 2rem;
+  color: var(--primary-color);
+}
+header ul li:nth-child(2) {
+  margin-left: auto;
+}
