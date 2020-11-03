@@ -1,0 +1,21 @@
+.btn {
+  padding: .5rem 1rem;
+  outline: none;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border: 1.5px solid var(--primary-color);
+}
+.btn:hover, .btn:focus {
+  color: var(--primary-color);
+  outline: none;
+  box-shadow: none;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  background-color: var(--disabled-color);
+}
+
+.icon-btn {
+  font-weight: bold;
+}

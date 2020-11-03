@@ -1,0 +1,5 @@
+.react-monaco-editor-container {
+  min-height: 50vh;
+  height: 100%;
+  width: 100%;
+}
