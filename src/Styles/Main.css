@@ -1,0 +1,29 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* grid-gap: 2rem; */
+  height: calc(100vh - 70px);
+}
+main > section {
+  padding: var(--body-spacing);
+  border-right: 2px solid var(--border-color);
+}
+
+.coding-output-window {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 2rem;
+  place-content: center;
+  padding: 3rem;
+  border: none;
+}
+
+@media (max-width: 700px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  .coding-output-window {
+    border-top: 2px solid var(--border-color);
+    padding: 1rem;
+  }
+}

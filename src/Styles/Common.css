@@ -1,0 +1,57 @@
+:root {
+  --white:#ffffffd6;
+  --black: #171717;
+  --light-grey: #1f1f1f;
+  --error-color: #dc6666;
+
+  --primary-color: var(--white);
+  --background-color: var(--black);
+
+  --border-color: var(--light-grey);
+  --disabled-color: var(--light-grey);
+
+  --body-spacing: 1rem;
+  --font-size: 14px;
+}
+
+html,
+body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: 'Fira Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  background-color: var(--background-color);
+  font-size: var(--font-size);
+  color: var(--primary-color);
+}
+.text-center {
+  text-align: center !important;
+}
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+a:hover {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+h1, h2, h3, h4, p {
+  margin: 0
+}
+.error-content {
+  background-color: var(--light-grey);
+  padding: 1rem;
+  width: 100%;
+}
+.error-content > .err-heading {
+  color: var(--error-color);
+}
+.error-content > .err-msg {
+  color: var(--primary-color);
+  font-size: .9rem;
+}
