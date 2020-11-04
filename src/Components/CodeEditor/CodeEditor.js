@@ -20,7 +20,6 @@ const CodingEditor = () => {
   }
 
   const evaluateCode = () => {
-    console.log('code evaludated')
     try {
       safeEval(code)
       dispatch({

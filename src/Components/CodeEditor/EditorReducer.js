@@ -1,7 +1,7 @@
 const InitialState = [{
   fileName: 'main.js',
   code: `function handleResponse (msg) {\n\t// YOUR CODE HERE
-    return new Promise(resolve => { \n\t\tsetTimeout(() => {\n\t\t\tresolve(msg)\n\t\t}, 3000)\n\t})\n}`
+    return new Promise(resolve => { \n\t\tsetTimeout(() => {\n\t\t\tresolve(msg)\n\t\t}, 1000)\n\t})\n}`
 }]
 
 const EditorReducer = (state = InitialState, action) => {
@@ -16,7 +16,6 @@ const EditorReducer = (state = InitialState, action) => {
       ]
     case 'REMOVE_FILE':
       return state.filter((file, idx) => idx !== action.fileIdx)
-
     case 'UPDATE_FILE_CODE':
       let updatedState = state.map((file, idx) => {
         if (idx === action.fileIdx) {

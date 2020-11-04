@@ -7,14 +7,14 @@ const App = () => {
   return (
     <>
       <Header />
-        <main>
-          <section className='coding-editor'>
-            <CodeEditor />
-          </section>
-          <section className='coding-output-window'>
-            <ChatWindow />
-          </section>
-        </main>
+      <main>
+        <section className='coding-editor'>
+          <CodeEditor />
+        </section>
+        <section className='coding-output-window'>
+          <ChatWindow />
+        </section>
+      </main>
     </>
   )
 }

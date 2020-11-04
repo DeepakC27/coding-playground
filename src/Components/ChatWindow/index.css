@@ -22,3 +22,9 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@media (max-width: 700px) {
+  .chat-window ul {
+    max-height: 30vh;
+  }
+}

@@ -5,7 +5,7 @@ import './index.css'
 const ChatWindow = () => {
   const [userMsg, setUserMsg] = useState('')
   const [msgList, updateMessages] = useState([])
-  const [loadingBotMsg, toggleBotLoader] = useState(false)
+  const [showBotLoader, toggleBotLoader] = useState(false)
   const [botResponse, setBotResponse] = useState('')
 
   const userIpOnChange = e => {
@@ -19,7 +19,7 @@ const ChatWindow = () => {
   }
 
   useEffect(() => {
-    msgList.length > 0 && scrollToBottom()
+    msgList.length && scrollToBottom()
   }, [msgList])
 
   const validateMsg = e => {
@@ -63,10 +63,7 @@ const ChatWindow = () => {
           {msgList.map((msg, index) => (
             <MessageUI key={'msg-' + index} msg={msg.text} userType={msg.userType} />
           ))}
-          {loadingBotMsg
-            ? <MessageUI msg='Hi there' isLoading={true} userType='bot' />
-            : ''
-          }
+          {showBotLoader && <MessageUI isLoading userType='bot' />}
         </ul>
       </div>
       <Input className='chat-input'

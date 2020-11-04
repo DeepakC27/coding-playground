@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react'
-import { ControlledEditor } from "@monaco-editor/react";
+import React, { useEffect, useState } from 'react'
+import { ControlledEditor } from '@monaco-editor/react'
 import { debounce } from 'lodash'
 import './index.css'
 
 const Editor = ({ code, setCode }) => {
-  const editorRef = useRef()
   const [editorDimensions, setDimensions] = useState({
     height: (window.innerWidth <= 700 ? '30vh' : '60vh'),
     width: '100%'
@@ -12,11 +11,6 @@ const Editor = ({ code, setCode }) => {
 
   const onChange = (_, value) => {
     setCode(value)
-  }
-
-  const editorDidMount = (_, ref) => {
-    editorRef.current = ref
-    window.editorRef = ref
   }
 
   useEffect(() => {
@@ -57,7 +51,6 @@ const Editor = ({ code, setCode }) => {
           fontSize: 14
         }}
         onChange={onChange}
-        editorDidMount={editorDidMount}
       />
     </>
   )

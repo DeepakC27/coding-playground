@@ -6,7 +6,7 @@ const MessageUI = ({ msg, isLoading, userType = 'bot' }) => {
   const isBot = userType === 'bot'
   return (
     <>
-      <div className={`msg-wraper ${isBot ? 'bot-chat-UI' : 'user-chat-UI'} ${isLoading ? 'msg-loading' : ''}`}>
+      <li className={`msg-wraper ${isBot ? 'bot-chat-UI' : 'user-chat-UI'} ${isLoading ? 'msg-loading' : ''}`}>
         <img src={BotImg} alt={isBot ? 'bot' : 'user' } />
         {isLoading
           ? <div className='chat-loader'>
@@ -16,7 +16,7 @@ const MessageUI = ({ msg, isLoading, userType = 'bot' }) => {
           </div>
           : <div className='msg-info'>{msg}</div>
         }
-      </div>
+      </li>
     </>
   )
 }
