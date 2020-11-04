@@ -38,7 +38,7 @@ npm i
 npm run start
 ```
 
-### Pacakages used
+### Packages used
   - lodash
   - monaco-editor
   - react-redux
