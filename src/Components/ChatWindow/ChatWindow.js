@@ -8,12 +8,22 @@ const ChatWindow = () => {
   const [loadingBotMsg, toggleBotLoader] = useState(false)
   const [botResponse, setBotResponse] = useState('')
 
-  const userIpOnChange = (e) => {
+  const userIpOnChange = e => {
     setUserMsg(e.target.value)
   }
 
-  const validateMsg = (e) => {
-    if (e.which === 13 || e.key === 'Enter') {
+  const scrollToBottom = () => {
+    const chatWrapper = document.querySelector('.chat-list')
+    const bottomWidth = (chatWrapper.firstElementChild.clientHeight * chatWrapper.childElementCount)
+    chatWrapper.scrollTo({ top: bottomWidth, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    msgList.length > 0 && scrollToBottom()
+  }, [msgList])
+
+  const validateMsg = e => {
+    if ((e.which === 13 || e.key === 'Enter') && userMsg.trim()) {
       updateMessages([
         ...msgList,
         { text: userMsg, userType: 'user' }
@@ -31,6 +41,7 @@ const ChatWindow = () => {
       toggleBotLoader(false)
       response && setBotResponse(response)
     } catch (err) {
+      toggleBotLoader(false)
       console.log(err)
     }
   }

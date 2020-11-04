@@ -1,22 +1,26 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useState, useCallback } from 'react'
 import { Editor, Button } from '../../Common'
+import { EditorReducer, InitialState } from './EditorReducer'
 import safeEval from 'safe-eval'
 import './index.css'
 
 const CodingEditor = () => {
   const [filesState, dispatch] = useReducer(EditorReducer, InitialState)
   const [code, setCode] = useState(filesState[0].code)
-
   const [activeFileIdx, setActiveFileIdx] = useState(0)
   const [errorContent, setErrorMsg] = useState({ name: '', message: '' })
   const [btnStatus, setBtnStatus] = useState(true)
 
-  const updateFileIdx = (fileIdx) => {
-    setActiveFileIdx(fileIdx)
-    setCode(filesState[fileIdx].code)
+  const addNewFile = () => {
+    dispatch({ type: 'ADD_NEW_FILE'})
+  }
+
+  const removeFile = idx => {
+    dispatch({ type: 'REMOVE_FILE', fileIdx: idx })
   }
 
   const evaluateCode = () => {
+    console.log('code evaludated')
     try {
       safeEval(code)
       dispatch({
@@ -32,12 +36,20 @@ const CodingEditor = () => {
       dynamicScript.innerHTML = code.trim()
       document.body.appendChild(dynamicScript)
     } catch (err) {
-      setErrorMsg(err)
+      console.log(err)
+      setErrorMsg({
+        name: err.name,
+        message: err.message
+      })
       setBtnStatus(false)
     }
   }
 
-  const updateCode = (value) => {
+  useEffect(() => {
+    evaluateCode()
+  }, [])
+
+  const updateCode = value => {
     try {
       setCode(value)
       errorContent && errorContent.name && setErrorMsg({ name: '', message: '' })
@@ -51,13 +63,24 @@ const CodingEditor = () => {
     }
   }
 
-  useEffect(() => {
+  const resetStatus = useCallback(() => {
     setErrorMsg({ name: '', message: '' })
     setBtnStatus(true)
-  }, [filesState])
+  }, [])
+
+  const updateFileIdx = useCallback((fileIdx) => {
+    setActiveFileIdx(fileIdx)
+    setCode(filesState[fileIdx].code)
+    resetStatus()
+  }, [filesState, resetStatus])
+
+  useEffect(() => {
+    resetStatus()
+    filesState.length && updateFileIdx(filesState.length - 1)
+  }, [filesState, resetStatus, updateFileIdx])
 
   return (
-    <div className='coding-editor'>
+    <>
       <div className='editor-tabs'>
         <div className='files-list'>
           {filesState.map((file, idx) => 
@@ -66,12 +89,12 @@ const CodingEditor = () => {
               <Button onClick={() => updateFileIdx(idx)}>
                 {file.fileName}
               </Button>
-              {(idx !== 0) && <Button onClick={() => dispatch({ type: 'REMOVE_FILE', fileIdx: idx })}
+              {(idx !== 0) && <Button onClick={() => removeFile(idx)}
                 className='remove-file-btn icon-btn'>x</Button>}
             </div>
           )}
           {filesState.length < 3 &&
-            <Button onClick={() => dispatch({ type: 'ADD_NEW_FILE'})}
+            <Button onClick={addNewFile}
               className='add-file-btn icon-btn'>+</Button>
           }
         </div>
@@ -82,46 +105,20 @@ const CodingEditor = () => {
           Save
         </Button>
       </div>
-      <Editor code={code} setCode={updateCode} />
+      <hr />
+      <Editor code={code || ''} setCode={updateCode} />
       {errorContent && errorContent.name &&
-        <div className='error-content'>
-          <div className='err-heading'>{errorContent.name}</div>    
-          <p className='err-msg'>{errorContent.message}</p>
-        </div>
+        <ErrorConsole error={errorContent} />
       }
-    </div>
+    </>
   )
 }
 
-const InitialState = [{
-  fileName: 'main.js',
-  code: 'function handleResponse (msg) {\n\t // YOUR CODE HERE\n return msg \n}'
-}]
-
-const EditorReducer = (state = InitialState, action) => {
-  switch (action.type) {
-    case 'ADD_NEW_FILE':
-      return [
-        ...state,
-        {
-          fileName: Math.random().toString(36).substring(9) + '.js',
-          code: 'function handleResponse (msg) {\n\t // YOUR CODE HERE\n return msg \n}'
-        }
-      ]
-    case 'REMOVE_FILE':
-      return state.filter((file, idx) => idx !== action.fileIdx)
-
-    case 'UPDATE_FILE_CODE':
-      let updatedState = state.map((file, idx) => {
-        if (idx === action.fileIdx) {
-          file.code = action.code
-        }
-        return file
-      })
-      return updatedState
-    default:
-      return state
-  }
-}
+const ErrorConsole = ({ error }) => (
+  <div className='error-content'>
+    <div className='err-heading'>{error.name}</div>    
+    <p className='err-msg'>{error.message}</p>
+  </div>
+)
 
 export default CodingEditor

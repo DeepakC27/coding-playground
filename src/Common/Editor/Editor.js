@@ -6,7 +6,7 @@ import './index.css'
 const Editor = ({ code, setCode }) => {
   const editorRef = useRef()
   const [editorDimensions, setDimensions] = useState({
-    height: (window.innerWidth <= 700 ? '30vh' : '80%'),
+    height: (window.innerWidth <= 700 ? '30vh' : '60vh'),
     width: '100%'
   })
 
@@ -23,16 +23,15 @@ const Editor = ({ code, setCode }) => {
     window.addEventListener('resize', debounce(() => {
       setDimensions({
         height: (window.innerWidth <= 700
-          ? '50%'
-          : '80%'
+          ? '30vh'
+          : '60vh'
         ),
         width: (window.innerWidth <= 700
-          ? window.innerWidth - 35 + 'px'
-          : (window.innerWidth - 60) / 2 + 'px'
+          ? window.innerWidth + 'px'
+          : (window.innerWidth - 50) / 2 + 'px'
         )
       })
-      // editorRef.layout && editorRef.layout()
-    }), 100)
+    }), 250)
   }, [editorDimensions])
 
   return (
@@ -53,9 +52,7 @@ const Editor = ({ code, setCode }) => {
             enabled: false
           },
           scrollbar: {
-
-            horizontal: 'hidden',
-            vertical: 'hidden'
+            horizontal: 'hidden'
           },
           fontSize: 14
         }}

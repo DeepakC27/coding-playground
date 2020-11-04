@@ -1,7 +1,7 @@
 :root {
   --white:#ffffffd6;
   --black: #171717;
-  --light-grey: #1f1f1f;
+  --light-grey: #2b2b2b;
   --error-color: #dc6666;
 
   --primary-color: var(--white);
@@ -23,6 +23,7 @@ body, #root {
   font-family: 'Fira Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 body {
   background-color: var(--background-color);
@@ -46,7 +47,6 @@ h1, h2, h3, h4, p {
 .error-content {
   background-color: var(--light-grey);
   padding: 1rem;
-  width: 100%;
 }
 .error-content > .err-heading {
   color: var(--error-color);
@@ -54,4 +54,8 @@ h1, h2, h3, h4, p {
 .error-content > .err-msg {
   color: var(--primary-color);
   font-size: .9rem;
+}
+hr {
+  border-bottom: 2px solid var(--border-color);
+  margin: 0;
 }

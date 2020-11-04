@@ -8,7 +8,7 @@ const App = () => {
     <>
       <Header />
         <main>
-          <section>
+          <section className='coding-editor'>
             <CodeEditor />
           </section>
           <section className='coding-output-window'>

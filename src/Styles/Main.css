@@ -1,12 +1,14 @@
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* grid-gap: 2rem; */
-  height: calc(100vh - 70px);
+  height: calc(100vh - 62px);
 }
 main > section {
-  padding: var(--body-spacing);
   border-right: 2px solid var(--border-color);
+}
+
+main .coding-editor {
+  height: 100%;
 }
 
 .coding-output-window {
