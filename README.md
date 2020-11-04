@@ -1,5 +1,5 @@
 # Coding Playground
-WebApp with open editor to allow code & preview at the same time. For the time being restricted to a specfic UI.
+WebApp with open editor to allow code & preview at the same time. For the time being restricted to a specific UI.
 
 ## Folder Structure
 ```
