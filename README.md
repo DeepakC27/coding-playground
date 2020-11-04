@@ -25,7 +25,7 @@ WebApp with open editor to allow code & preview at the same time. For the time b
 
 
 ### Tech Stack
-ReactJS, Bootstrap
+HTML5, CSS, ReactJS, Bootstrap
 
 
 ### Installation
