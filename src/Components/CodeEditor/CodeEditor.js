@@ -73,10 +73,12 @@ const CodingEditor = () => {
     resetStatus()
   }, [filesState, resetStatus])
 
+
   useEffect(() => {
-    resetStatus()
-    filesState.length && updateFileIdx(filesState.length - 1)
-  }, [filesState, resetStatus, updateFileIdx])
+    if (filesState.length) {
+      updateFileIdx(filesState.length - 1)
+    }
+  }, [filesState.length])
 
   return (
     <>
