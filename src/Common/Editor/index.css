@@ -3,3 +3,12 @@
   height: 100%;
   width: 100%;
 }
+.monaco-editor-background{
+  background: var(--background-color) !important;
+}
+.margin-view-overlays {
+  background-color: var(--background-color);
+}
+.decorationsOverviewRuler {
+  display: none;
+}

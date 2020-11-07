@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer, useState, useCallback } from 'react'
 import { Editor, Button } from '../../Common'
 import { EditorReducer, InitialState } from './EditorReducer'
+import { addCustomFunctionScript } from '../../Utils/Functions'
 import safeEval from 'safe-eval'
 import './index.css'
 
@@ -9,7 +10,7 @@ const CodingEditor = () => {
   const [code, setCode] = useState(filesState[0].code)
   const [activeFileIdx, setActiveFileIdx] = useState(0)
   const [errorContent, setErrorMsg] = useState({ name: '', message: '' })
-  const [btnStatus, setBtnStatus] = useState(true)
+  const [btnStatus, setBtnStatus] = useState(false)
 
   const addNewFile = () => {
     dispatch({ type: 'ADD_NEW_FILE'})
@@ -32,8 +33,9 @@ const CodingEditor = () => {
       }
       const dynamicScript = document.createElement('script')
       dynamicScript.id = 'output-handler-script'
-      dynamicScript.innerHTML = code.trim()
+      dynamicScript.innerHTML = `${code.trim()}`
       document.body.appendChild(dynamicScript)
+      setBtnStatus(false)
     } catch (err) {
       console.log(err)
       setErrorMsg({
@@ -44,8 +46,16 @@ const CodingEditor = () => {
     }
   }
 
+  const addCustomFunction = () => {
+    setCode(`${code}\nBotResponse(msg)`)
+    addCustomFunctionScript()
+    setBtnStatus(true)
+    
+  }
+
   useEffect(() => {
     evaluateCode()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const updateCode = value => {
@@ -53,9 +63,9 @@ const CodingEditor = () => {
       setCode(value)
       errorContent && errorContent.name && setErrorMsg({ name: '', message: '' })
       if (btnStatus) {
-        !value && setBtnStatus(false)
+        // !value && setBtnStatus(false)
       } else {
-        value && (!btnStatus) && setBtnStatus(true)
+        value && !btnStatus && setBtnStatus(true)
       }
     } catch (err) {
       setErrorMsg(err)
@@ -64,7 +74,7 @@ const CodingEditor = () => {
 
   const resetStatus = useCallback(() => {
     setErrorMsg({ name: '', message: '' })
-    setBtnStatus(true)
+    setBtnStatus(false)
   }, [])
 
   const updateFileIdx = useCallback((fileIdx) => {
@@ -112,6 +122,13 @@ const CodingEditor = () => {
       {errorContent && errorContent.name &&
         <ErrorConsole error={errorContent} />
       }
+      <hr />
+      <div className='custom-functions'>
+        <div className='function-tag' onClick={addCustomFunction}>
+          <h4>BuiltInResponse</h4>
+          <div>Built in function to add random response</div>
+        </div>
+      </div>
     </>
   )
 }

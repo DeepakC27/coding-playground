@@ -45,19 +45,25 @@
   }
 }
 .coding-editor .evaluate-btn {
-  border: 2px solid var(--border-color);
-  padding: .5rem 1rem;
+  border: 1px solid var(--primary-color);
+  padding: .25rem 1rem;
   margin-left: auto;
-  margin-top: -.5rem;
+  margin-top: -.25rem;
   height: fit-content;
 }
-.coding-editor hr {
+.coding-editor hr:nth-child(1) {
   margin-bottom: 1rem;
   margin-top: -.2rem;
 }
-.coding-editor .view-lines, .coding-editor .margin-view-overlays {
-  background-color: var(--background-color);
+
+.custom-functions {
+  background-color: var(--light-grey);
+  margin: 2rem;
 }
-.coding-editor .decorationsOverviewRuler {
-  display: none;
+.custom-functions .function-tag {
+  padding: 1rem;
+  cursor: pointer;
+}
+.function-tag h4 {
+  font-size: 16px;
 }
