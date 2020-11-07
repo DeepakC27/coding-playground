@@ -13,6 +13,7 @@
 
 .btn:disabled {
   cursor: not-allowed;
+  border: 1px solid var(--disabled-color) !important;
   background-color: var(--disabled-color);
 }
 

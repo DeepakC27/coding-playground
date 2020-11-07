@@ -13,6 +13,7 @@
   padding: .6rem 1rem;
   border-radius: 1rem;
   max-width: 50%;
+  word-break: break-word;
 }
 .user-chat-UI {
   flex-direction: row-reverse;

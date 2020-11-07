@@ -11,7 +11,7 @@ const EditorReducer = (state = InitialState, action) => {
         ...state,
         {
           fileName: Math.random().toString(36).substring(9) + '.js',
-          code: 'function handleResponse (msg) {\n\t // YOUR CODE HERE\n return msg \n}'
+          code: 'function handleResponse (msg) {\n\t// YOUR CODE HERE\n\treturn msg\n}'
         }
       ]
     case 'REMOVE_FILE':
