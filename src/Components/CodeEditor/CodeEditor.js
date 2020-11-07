@@ -117,7 +117,7 @@ const CodingEditor = () => {
           Save
         </Button>
       </div>
-      <hr />
+      <hr className='editor-seperator' />
       <Editor code={code || ''} setCode={updateCode} />
       {errorContent && errorContent.name &&
         <ErrorConsole error={errorContent} />

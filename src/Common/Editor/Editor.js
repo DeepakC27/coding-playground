@@ -5,7 +5,7 @@ import './index.css'
 
 const Editor = ({ code, setCode }) => {
   const [editorDimensions, setDimensions] = useState({
-    height: (window.innerWidth <= 700 ? '30vh' : '60vh'),
+    height: (window.innerWidth <= 700 ? '30vh' : '50vh'),
     width: '100%'
   })
 
@@ -18,7 +18,7 @@ const Editor = ({ code, setCode }) => {
       setDimensions({
         height: (window.innerWidth <= 700
           ? '30vh'
-          : '60vh'
+          : '50vh'
         ),
         width: (window.innerWidth <= 700
           ? window.innerWidth + 'px'
@@ -42,6 +42,7 @@ const Editor = ({ code, setCode }) => {
           cursorBlinking: 'blink',
           matchBrackets: 'always',
           scrollBeyondLastLine: false,
+          selectionHighlight: true,
           minimap: {
             enabled: false
           },
