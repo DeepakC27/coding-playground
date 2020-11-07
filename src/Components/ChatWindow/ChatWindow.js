@@ -14,8 +14,7 @@ const ChatWindow = () => {
 
   const scrollToBottom = () => {
     const chatWrapper = document.querySelector('.chat-list')
-    const bottomWidth = (chatWrapper.firstElementChild.clientHeight * chatWrapper.childElementCount)
-    chatWrapper.scrollTo({ top: bottomWidth, behavior: 'smooth' })
+    chatWrapper.scrollTo({ top: chatWrapper.scrollHeight, behavior: 'smooth' })
   }
 
   useEffect(() => {
