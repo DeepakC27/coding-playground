@@ -78,6 +78,7 @@ const CodingEditor = () => {
     if (filesState.length) {
       updateFileIdx(filesState.length - 1)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filesState.length])
 
   return (
