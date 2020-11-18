@@ -25,7 +25,7 @@ const Editor = ({ code, setCode }) => {
           : (window.innerWidth - 50) / 2 + 'px'
         )
       })
-    }), 250)
+    }), 500)
   }, [editorDimensions])
 
   return (
