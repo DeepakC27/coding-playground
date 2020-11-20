@@ -5,6 +5,8 @@ import { addCustomFunctionScript } from '../../Utils/Functions'
 import safeEval from 'safe-eval'
 import './index.css'
 
+const Babel = require("babel-standalone")
+
 const CodingEditor = () => {
   const [filesState, dispatch] = useReducer(EditorReducer, InitialState)
   const [code, setCode] = useState(filesState[0].code)
@@ -22,7 +24,8 @@ const CodingEditor = () => {
 
   const evaluateCode = () => {
     try {
-      safeEval(code)
+      const updatedCode = parseCode()
+      safeEval(updatedCode)
       dispatch({
         type: 'UPDATE_FILE_CODE',
         fileIdx: activeFileIdx,
@@ -30,10 +33,12 @@ const CodingEditor = () => {
       })
       if (document.getElementById('output-handler-script')) {
         document.body.removeChild(document.getElementById('output-handler-script'))
+        // document.getElementById('output-handler-script').innerHTML = `${updatedCode.trim()}`
+        // return
       }
       const dynamicScript = document.createElement('script')
       dynamicScript.id = 'output-handler-script'
-      dynamicScript.innerHTML = `${code.trim()}`
+      dynamicScript.innerHTML = `${updatedCode.trim()}`
       document.body.appendChild(dynamicScript)
       setBtnStatus(false)
     } catch (err) {
@@ -44,6 +49,18 @@ const CodingEditor = () => {
       })
       setBtnStatus(false)
     }
+  }
+
+  const parseCode = () => {
+    let response = Babel.transform(code, {
+      presets: ['es2015'],
+      plugins: [
+        'transform-es2015-arrow-functions',
+        // 'transform-es2015-spread',
+      //   'transform-es2015-function-name'
+      ]
+    })
+    return response.code
   }
 
   const addCustomFunction = () => {

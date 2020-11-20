@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { ControlledEditor } from '@monaco-editor/react'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import './index.css'
 
 const Editor = ({ code, setCode }) => {
