@@ -1,11 +1,9 @@
 import React, { useEffect, useReducer, useState, useCallback } from 'react'
 import { Editor, Button } from '../../Common'
 import { EditorReducer, InitialState } from './EditorReducer'
-import { addCustomFunctionScript } from '../../Utils/Functions'
+import { addCustomFunctionScript, parseCode } from '../../Utils/Functions'
 import safeEval from 'safe-eval'
 import './index.css'
-
-const Babel = require("babel-standalone")
 
 const CodingEditor = () => {
   const [filesState, dispatch] = useReducer(EditorReducer, InitialState)
@@ -24,7 +22,7 @@ const CodingEditor = () => {
 
   const evaluateCode = () => {
     try {
-      const updatedCode = parseCode()
+      const updatedCode = parseCode(code)
       safeEval(updatedCode)
       dispatch({
         type: 'UPDATE_FILE_CODE',
@@ -42,25 +40,12 @@ const CodingEditor = () => {
       document.body.appendChild(dynamicScript)
       setBtnStatus(false)
     } catch (err) {
-      console.log(err)
       setErrorMsg({
         name: err.name,
         message: err.message
       })
       setBtnStatus(false)
     }
-  }
-
-  const parseCode = () => {
-    let response = Babel.transform(code, {
-      presets: ['es2015'],
-      plugins: [
-        'transform-es2015-arrow-functions',
-        // 'transform-es2015-spread',
-      //   'transform-es2015-function-name'
-      ]
-    })
-    return response.code
   }
 
   const addCustomFunction = () => {

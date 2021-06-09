@@ -1,6 +1,6 @@
 const InitialState = [{
   fileName: 'main.js',
-  code: `function handleResponse (msg) {\n\t// YOUR CODE HERE
+  code: `const handleResponse = (msg) => {\n\t// YOUR CODE HERE
     return new Promise(resolve => { \n\t\tsetTimeout(() => {\n\t\t\tresolve(msg)\n\t\t}, 1000)\n\t})\n}`
 }]
 
@@ -11,7 +11,7 @@ const EditorReducer = (state = InitialState, action) => {
         ...state,
         {
           fileName: Math.random().toString(36).substring(9) + '.js',
-          code: 'function handleResponse (msg) {\n\t// YOUR CODE HERE\n\treturn msg\n}'
+          code: 'const handleResponse = (msg) => {\n\t// YOUR CODE HERE\n\treturn msg\n}'
         }
       ]
     case 'REMOVE_FILE':

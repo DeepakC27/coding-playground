@@ -1,5 +1,7 @@
+const Babel = require("babel-standalone")
+
 const CustomInternalFunc = () => {
-  return `function BotResponse (msg) { return (Math.random().toString(36).substring(5)) }`
+  return `const BotResponse = (msg) => { return (Math.random().toString(36).substring(5)) }`
 }
 
 const addCustomFunctionScript = () => {
@@ -9,11 +11,26 @@ const addCustomFunctionScript = () => {
     }
     const dynamicScript = document.createElement('script')
     dynamicScript.id = 'custom-handler-script'
-    dynamicScript.innerHTML = `${CustomInternalFunc()}`
+    dynamicScript.innerHTML = `${parseCode(CustomInternalFunc())}`
     return document.body.appendChild(dynamicScript)
   } catch {
     return false
   }
 }
 
-export { addCustomFunctionScript }
+const parseCode = (code) => {
+  let response = Babel.transform(code, {
+    presets: ['es2015'],
+    plugins: [
+      'transform-es2015-arrow-functions',
+      // 'transform-es2015-spread',
+    //   'transform-es2015-function-name'
+    ]
+  })
+  return response.code
+}
+
+export {
+  addCustomFunctionScript,
+  parseCode
+}
